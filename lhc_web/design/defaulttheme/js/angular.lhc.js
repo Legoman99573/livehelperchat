@@ -1,6 +1,8 @@
 $( document ).ready(function() {
 	var hash = window.location.hash;	
 	if (hash != '') {
+		var chat_id = hash.match(/\d+$/);
+		$('ul[role="tablist"] a[href="#chat-id-' + chat_id + '"]').tab('show');
 		$('ul[role="tablist"] a[href="' + hash.replace("#/","#") + '"]').tab('show');
 	}
 });
@@ -553,10 +555,6 @@ lhcAppControllers.controller('LiveHelperChatCtrl',['$scope','$http','$location',
                 	clearTimeout(lhinst.soundIsPlaying);
 				};
 		
-				if (typeof data.ou !== 'undefined') {
-					eval(data.ou);
-				}
-				
 				if ($scope.setTimeoutEnabled == true) {
 					$scope.timeoutControl = setTimeout(function(){
 						$scope.loadChatList();
@@ -624,4 +622,3 @@ lhcAppControllers.controller('LiveHelperChatCtrl',['$scope','$http','$location',
 	this.initLHCData();
 	
 }]);
-
